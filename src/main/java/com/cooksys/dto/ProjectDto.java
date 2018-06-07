@@ -1,47 +1,30 @@
-package com.cooksys.entity;
+package com.cooksys.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.cooksys.dto.datatype.BaseEntity;
+import com.cooksys.dto.datatype.Reference;
+import com.cooksys.entity.ProjectManager;
 
-@Entity
-public class Project implements BaseEntity<Long> {
+public class ProjectDto {
 
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@OneToMany
+	private Reference<ProjectManager, Long> manager;
 	
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
-	
-	@ManyToOne
-	private ProjectManager manager;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public ProjectManager getManager() {
-		return manager;
-	}
-
-	public void setManager(ProjectManager manager) {
-		this.manager = manager;
-	}
 
 	@Override
 	public int hashCode() {
@@ -59,7 +42,7 @@ public class Project implements BaseEntity<Long> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Project other = (Project) obj;
+		ProjectDto other = (ProjectDto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -67,5 +50,36 @@ public class Project implements BaseEntity<Long> {
 			return false;
 		return true;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Reference<ProjectManager, Long> getManager() {
+		return manager;
+	}
+
+	public void setManager(Reference<ProjectManager, Long> manager) {
+		this.manager = manager;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
 }

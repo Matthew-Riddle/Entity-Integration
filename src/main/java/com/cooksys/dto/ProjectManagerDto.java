@@ -2,11 +2,16 @@ package com.cooksys.dto;
 
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.cooksys.dto.datatype.Reference;
 import com.cooksys.entity.Project;
 
 public class ProjectManagerDto {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
 	
 	private String firstName;
